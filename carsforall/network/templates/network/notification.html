@@ -1,0 +1,67 @@
+{% extends "network/layout.html" %}
+{% block style %}
+	<style type="text/css">
+		#tags
+            {
+            	background-color: #dae0e5;
+                position: relative;
+                
+                
+                margin-left: 25%;
+                margin-top:2%;
+               	font-size: 20px;
+                padding:1%;
+                width:40%;
+                border-radius: 50px;
+                border: 1px solid black;
+                
+            }
+        #descrip
+        {
+        	margin-left:9%;
+        	margin-top: 5%;
+        }
+	</style>
+{% endblock %}
+{% block body %}
+	
+	<h3  id="descrip">Users who wished to rent your car(s) are here .Accept or reject their request for further process. </h3>
+	
+
+	{% for wishers,car in rental_info %}
+		<div id="tags">
+			<p>Your Car :<a href="{% url 'list' car.id %}">{{car.name}}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Users wished to rent</p>
+			<div id="usersList{{car.pk}}">
+			{% for name in wishers %}
+		
+				<p style="padding-left: 60%; color:blue;" data-car="{{car.pk}}" id="SingleUser{{name.username}}{{car.pk}}"><a href="#" >{{name.username}}</a>
+					<button class="btn btn-outline-success btn-sm" data-car="{{car.pk}}" data-name="{{name.username}}" id="Accept">Accept</button>
+					<button class="btn btn-outline-danger btn-sm" data-car="{{car.pk}}" data-name="{{name.username}}" id="Decline">Decline</button>
+				</p>
+			{% endfor %}	
+				
+			
+			</div>
+			<div id="confirmRent{{car.pk}}" style="display: none; padding-left: 30%">You rented your car to <a href="#"></a></div>
+
+		</div>
+	{% endfor %}
+	
+
+	<!--<h1>{{rental_info}}</h1>-->
+{% endblock %}
+		<!--<div id="tags">Users who wished to rent your car <strong>{{car_name}}</strong></div>
+<tr>
+		<td>{{car_name}}</td>
+		{% for names in wishers %}
+		
+			<td>{{names}}</td>
+		{% endfor %}
+
+		<h3>{{car_name}}</h3>
+		
+		{% for names in wishers %}
+			<h2>{{names}}</h2>
+		{% endfor %}
+		
+	</tr>-->

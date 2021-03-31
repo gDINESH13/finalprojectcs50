@@ -1,0 +1,70 @@
+{% extends "network/layout.html" %}
+{% block style %}
+<style type="text/css">
+    .profile
+                {
+                    margin-top: 3%;
+                    margin-left: 15%;
+                    width: 30%;
+                    height:40%;
+                    padding: 10px;
+                    position: fixed;
+                    border-bottom-left-radius: 50px;
+                    border-top-right-radius: 50px;
+                    border-top-left-radius: 15px;
+                    border-bottom-right-radius: 15px;
+                    border-color: 1px solid blue;
+                    background-color: #DCDCDC;
+                }
+        #image
+        {
+            width: 80%;
+            height: 60%;
+            padding-left:15%;
+        }
+        #username
+        {
+            padding-left: 40%;
+        }
+        .cars_user
+                {
+                    margin-top: 22%;
+                    margin-left: 45%;
+                    width: 30%;
+                    height:40%;
+                    padding: 10px;
+                    position: fixed;
+                    border-bottom-left-radius: 50px;
+                    border-top-right-radius: 50px;
+                    border-top-left-radius: 15px;
+                    border-bottom-right-radius: 15px;
+                    border-color: 1px solid blue;
+                    background-color: #DCDCDC;
+                }
+</style>
+	
+{% endblock %}
+{% block body %}
+
+
+    <div class="profile">
+            <img src="https://clubsports.gcu.edu/wp-content/uploads/Coach-Avator.png" id="image">
+            <h3  id="username" style="padding-top: 10px;">{{profile.username}}</h3>
+            <p style="font-size: 20px;padding-left: 10%;">Email id for contact:<strong> {{profile.email}}</strong></p>
+            
+
+            
+    </div> 
+    <div class="cars_user" style="padding-left: 8%; padding-top: 2%;">
+            <h4>List of cars {{profile.username}} have</h4>
+            {% for car in cars_owned %}
+                <a href="{% url 'list' car.id %}"><h5 style="padding-left: 13%;padding-top: 2%;">{{car.name}}</h5></a>
+
+                {% empty %}
+                    <h3 style="padding-top: 10%; ">{{profile.username}} doesn't own any car.</h3>
+            {% endfor %}
+            
+
+            
+    </div> 
+{% endblock %}

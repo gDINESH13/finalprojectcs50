@@ -1,0 +1,36 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <div style="margin-left: 50%;margin-right: 10%;margin-top: 5%">
+    
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form class="text-center border border-light p-5" action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+    <p class="h4 mb-4">Sign in</p>
+
+    <!-- Email -->
+    <input autofocus class="form-control mb-4" type="text" name="username" placeholder="Username">
+
+    <!-- Password -->
+    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" name="password">
+
+    
+
+    <!-- Sign in button -->
+    <input class="btn btn-info btn-block my-4" type="submit" value="Login">
+
+    <!-- Register -->
+    
+    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+    <!-- Social login -->
+   
+
+    </form>
+
+    
+    </div>
+{% endblock %}

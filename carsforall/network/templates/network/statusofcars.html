@@ -1,0 +1,88 @@
+{% extends "network/layout.html" %}
+{% block style %}
+	<style type="text/css">
+    .list_cover
+            {
+                background-color: white;
+                display: inline-flex;
+                vertical-align: middle;
+                
+                margin-left: 30%;
+                margin-top: 5%;
+                width: 45%;
+                height: 200px;
+                border: 1px solid #dfdfdf;
+                border-radius: 5px;
+                
+                
+            } 
+            .list_cover:hover{
+                box-shadow: 0px 10px 22px 2px rgba(0,0,0,0.44);
+             }
+            .list_img
+            {
+                margin: 10px;
+                height: 250px;
+                width: 250;
+            }
+            .list_img img
+            {
+                 max-width: 100%;
+                 max-height: 100%;
+                 border-top-left-radius: 5px;
+                 border-bottom-left-radius: 5px;
+            }
+            h2
+            {
+                margin:2%;
+            }
+
+</style>
+{% endblock %}
+{% block body %}
+	<h1 style="margin-left: 35%">Status of your cars at present.</h1>
+	{% for car,user,time in stat %}
+			<div class="list_cover container">
+                <div class="list_img">
+                    <img src="{{car.image}}" style="text-align: center;padding: 5px;">
+                </div>
+               
+            
+            <div class="container">
+                <div class="row justify-content-start">
+                    <div class="col-4">
+                        <h3><a href="{% url 'list' car.id %}" class="li">{{ car.name }}</a></h3>
+                    </div>
+                </div>
+                    <div class="row justify-content-center" id="div1{{car.pk}}">
+                        <div class="col-12">
+                            <div class="description">
+                            	{% if car.status %}
+                                	<h1>NOT RENTED</h1>
+                                {% else %}
+                                	<h2>RENTED</h2>
+                                	<button class="btn btn-outline-warning btn-sm" id="endrent" data-id="{{car.pk}}" data-name="{{user.username}}">End Renting</button>
+                                {% endif %}
+                            	
+                            </div>
+                            <div class="price">
+                                {% if not car.status %}Rented by: <strong>{{user}}</strong> {% endif %}
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="row justify-content-end" id="div2{{car.pk}}">
+                            <div class="col-12">
+                                <div class="date">{% if not car.status %}Rented on:  <strong>{{ car.curr_time_rent }} </strong>{% endif %}</div>
+                            </div>
+                    </div>
+                    <div style="display: none;" id="div3{{car.pk}}"><h1>NOT RENTED</h1></div>
+               </div> 
+        	</div>
+			
+	
+
+			
+        {% empty %}
+             	<h2 style="padding:5%; padding-left: 28%">There are no cars of yours to see their rental status. </h2>
+    {% endfor %}
+{% endblock %}
